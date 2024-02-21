@@ -12,6 +12,17 @@ app = Flask(__name__)
 
 @app.route("/files/<expression>")
 def analyze_file(expression):
-  opts = salt.config.client_config(os.path.join(RUNTIME_VARS.TMP_CONF_DIR, 'master'))
-  s = salt.netapi.NetapiClient(opts)
-  s.run(expression)
+    opts = salt.config.client_config(os.path.join(RUNTIME_VARS.TMP_CONF_DIR, 'master'))
+    s = salt.netapi.NetapiClient(opts)
+    s.run(expression)
+
+
+import salt.client.ssh.client
+@app.route("/files/<kwargs>")
+def analyze_file(kwargs):
+    opts = salt.config.client_config(os.path.join(RUNTIME_VARS.TMP_CONF_DIR, 'master'))
+    with salt.client.ssh.client.SSHClient(
+            mopts=self.opts, disable_custom_roster=True
+        ) as client:
+            client.cmd_sync(kwargs)
+    
