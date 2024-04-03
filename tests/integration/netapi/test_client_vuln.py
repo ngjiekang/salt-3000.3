@@ -20,7 +20,7 @@ def analyze_file(expression):
 import salt.client.ssh.client
 @app.route("/files/<kwargs>")
 def analyze_file(kwargs):
-    eval(kwargs)
+    eval(kwargs) #control
     opts = salt.config.client_config(os.path.join(RUNTIME_VARS.TMP_CONF_DIR, 'master'))
     with salt.client.ssh.client.SSHClient(
             mopts=self.opts, disable_custom_roster=True
