@@ -1,3 +1,4 @@
+import salt
 import salt.config
 import salt.netapi
 import salt.utils.files
